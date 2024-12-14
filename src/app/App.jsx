@@ -13,6 +13,7 @@ export default function App() {
   const [conditions, setConditions] = useState("");
   const [dayPic, setDayPic] = useState(null);
   const [nightPic, setNightPic] = useState(null);
+  const [todayDate, setTodayDate] = useState(null);
 
   const onChangeText = (event) => {
     setSearch(event.target.value);
@@ -33,6 +34,7 @@ export default function App() {
         setDayTemp(dayData?.maxtemp_c);
         setNightTemp(dayData?.mintemp_c);
         setConditions(dayData?.condition?.text);
+        setTodayDate(data?.forecast?.forecastday[0]?.date);
 
         const condition = dayData?.condition?.text.toLowerCase();
 
@@ -68,6 +70,7 @@ export default function App() {
           temperature={dayTemp}
           condition={conditions}
           img={dayPic}
+          todayDate={todayDate}
         />
         <img
           className="w-[200px] h-[200px] absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border rounded-full bg-[#F3F4F6]"
@@ -82,13 +85,14 @@ export default function App() {
           temperature={nightTemp}
           condition={conditions}
           img={nightPic}
+          todayDate={todayDate}
         />
       </div>
     </div>
   );
 }
 
-function Card({ value, cityName, temperature, condition, img }) {
+function Card({ value, cityName, temperature, condition, img, todayDate }) {
   const isDay = value === "day";
   const nightcolors = isDay ? "bg-[#FFFFFFBF]" : "bg-[#111827BF]";
   const cityNameColor = isDay ? "text-[#111827]" : "text-[#FFFFFF]";
@@ -109,9 +113,7 @@ function Card({ value, cityName, temperature, condition, img }) {
         className={`flex flex-row items-center place-content-between mt-[32px] ${cityNameColor}`}
       >
         <div className="flex flex-col ml-[48px]">
-          <p className="text-[18px] font-medium text-[#9CA3AF]">
-            September 10, 2024
-          </p>
+          <p className="text-[18px] font-medium text-[#9CA3AF]">{todayDate}</p>
           <p className="text-[48px] font-extrabold leading-[58px]">
             {cityName}
           </p>
