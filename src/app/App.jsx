@@ -38,7 +38,7 @@ export default function App() {
 
         const condition = dayData?.condition?.text.toLowerCase();
 
-        if (condition?.includes("sun")) {
+        if (condition?.includes("sunny")) {
           setDayPic("Sun.png");
           setNightPic("Moon.png");
         } else if (
