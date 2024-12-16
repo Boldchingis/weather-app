@@ -38,9 +38,9 @@ export default function App() {
 
         const condition = dayData?.condition?.text.toLowerCase();
 
-        if (condition?.includes("sunny")) {
+        if (condition?.includes("sun")) {
           setDayPic("Sun.png");
-          setNightPic("Moon.png");
+          setNightPic("night.png");
         } else if (
           condition.includes("cloud") ||
           condition.includes("overcast") ||
@@ -59,7 +59,7 @@ export default function App() {
           setNightPic("moonRain.png");
         } else {
           setDayPic("Sun.png");
-          setNightPic("Moon.png");
+          setNightPic("night.png");
         }
       });
     });
