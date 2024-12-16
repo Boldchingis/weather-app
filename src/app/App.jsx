@@ -41,12 +41,22 @@ export default function App() {
         if (condition?.includes("sun")) {
           setDayPic("Day sun.png");
           setNightPic("Moon.png");
-        } else if (condition?.includes("cloud")) {
+        } else if (
+          condition.includes("cloud") ||
+          condition.includes("overcast") ||
+          condition.includes("mist")
+        ) {
           setDayPic("SunClouds.png");
           setNightPic("MoonCloud.png");
-        } else if (condition?.includes("snow")) {
+        } else if (
+          condition?.includes("snow") ||
+          condition?.includes("freezing")
+        ) {
           setDayPic("SunSnow.png");
           setNightPic("MoonSnow.png");
+        } else if (condition.includes("rain")) {
+          setDayPic("sunRain.png");
+          setNightPic("moonRain.png");
         } else {
           setDayPic("Sun.png");
           setNightPic("Moon.png");
@@ -123,19 +133,17 @@ function Card({ value, cityName, temperature, condition, img, todayDate }) {
       <div className="ml-auto mr-auto mt-[60px]">
         <img
           className="w-[262.11px] h-[262.11px] object-cover rounded-lg drop-shadow-[0_5px_25px_rgba(255,255,255,0.5)]"
-          src={img || "default.png"}
-          alt={condition || "Weather condition"}
+          src={img}
+          alt={condition}
         />
       </div>
       <div className="flex flex-col font-extrabold mt-[45px] ml-[48px]">
         <div
           className={`text-[104px] leading-[160px] text-transparent bg-clip-text bg-gradient-to-b ${temperatureStyle}`}
         >
-          {temperature || ".."}
+          {temperature}°
         </div>
-        <p className={`text-[24px] ${nightConditions}`}>
-          {condition || "Baijee..."}
-        </p>
+        <p className={`text-[24px] ${nightConditions}`}>{condition}</p>
       </div>
       <div
         className={`flex justify-around items-center mt-auto text-[32px] space-x-4 ${nightIcons}`}
